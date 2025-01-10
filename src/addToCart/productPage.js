@@ -7,12 +7,12 @@ import {
   Platform,
   SafeAreaView,
   Pressable,
-} from 'react-native';
-import React from 'react';
-import AddToCart from '.';
-import Icon from 'react-native-vector-icons/AntDesign';
+} from "react-native";
+import React from "react";
+import AddToCart from ".";
+import Icon from "@expo/vector-icons/AntDesign";
 
-const isAndroid = Platform.OS === 'android';
+const isAndroid = Platform.OS === "android";
 
 export default function ProductPage() {
   return (
@@ -21,7 +21,7 @@ export default function ProductPage() {
         <StatusBar backgroundColor="#425F57" />
       ) : (
         <>
-          <SafeAreaView style={{backgroundColor: '#425F57'}}></SafeAreaView>
+          <SafeAreaView style={{ backgroundColor: "#425F57" }}></SafeAreaView>
           <StatusBar barStyle="light-content" backgroundColor="#425F57" />
         </>
       )}
@@ -29,7 +29,7 @@ export default function ProductPage() {
         <View style={styles.imageContainer}>
           <Image
             style={styles.productImage}
-            source={require('./productImg.jpeg')}
+            source={require("./productImg.jpeg")}
           />
         </View>
 
@@ -42,7 +42,7 @@ export default function ProductPage() {
 
         <Text style={[styles.heading, styles.price]}>$ 30</Text>
 
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
           <Icon style={styles.review} name="star" size={13} color="#FDCC0D" />
           <Icon style={styles.review} name="star" size={13} color="#FDCC0D" />
           <Icon style={styles.review} name="star" size={13} color="#FDCC0D" />
@@ -62,50 +62,50 @@ export default function ProductPage() {
 }
 
 const styles = StyleSheet.create({
-  mainContent: {flex: 1, padding: 25, marginTop: isAndroid ? 0 : '5%'},
+  mainContent: { flex: 1, padding: 25, marginTop: isAndroid ? 0 : "5%" },
   imageContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
     height: 350,
     //   backgroundColor: 'red',
   },
   productImage: {
-    width: '80%',
-    height: '100%',
-    resizeMode: 'cover',
+    width: "80%",
+    height: "100%",
+    resizeMode: "cover",
   },
   heading: {
     // marginTop: 30,
     // marginBottom: 15,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     fontSize: 20,
-    color: 'black',
+    color: "black",
   },
   review: {
     marginRight: 5,
   },
   titleSection: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginTop: 25,
-    alignItems: 'center',
+    alignItems: "center",
   },
   description: {
     marginTop: isAndroid ? 5 : 10,
     lineHeight: 20,
   },
-  price: {color: 'green', marginBottom: isAndroid ? 0 : 5},
+  price: { color: "green", marginBottom: isAndroid ? 0 : 5 },
   backBtn: {
     width: 35,
     height: 35,
-    backgroundColor: 'white',
-    position: 'absolute',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "white",
+    position: "absolute",
+    justifyContent: "center",
+    alignItems: "center",
     borderRadius: 100,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 1,
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
 
     elevation: 3,
     left: 15,
-    top: isAndroid ? 25 : '8%',
+    top: isAndroid ? 25 : "8%",
     zIndex: 4,
   },
 });

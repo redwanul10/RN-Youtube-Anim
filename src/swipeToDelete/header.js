@@ -1,7 +1,7 @@
-import {View, Text, StyleSheet} from 'react-native';
-import React from 'react';
-import Icons from 'react-native-vector-icons/Entypo';
-import TextAvatar from './textAvatar';
+import { View, Text, StyleSheet } from "react-native";
+import React from "react";
+import Icons from "@expo/vector-icons/Entypo";
+import TextAvatar from "./textAvatar";
 
 const Header = () => {
   return (
@@ -17,13 +17,13 @@ export default Header;
 
 const style = StyleSheet.create({
   row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     paddingVertical: 8,
     paddingHorizontal: 10,
-    backgroundColor: 'white',
-    shadowColor: '#000',
+    backgroundColor: "white",
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,

@@ -1,0 +1,2 @@
+expo-router/entry
+node_modules/expo/AppEntry.js

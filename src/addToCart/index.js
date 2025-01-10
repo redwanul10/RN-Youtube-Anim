@@ -5,9 +5,9 @@ import {
   Dimensions,
   SafeAreaView,
   Platform,
-} from 'react-native';
-import React, {useEffect, useRef, useState} from 'react';
-import Icon from 'react-native-vector-icons/Ionicons';
+} from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import Icon from "@expo/vector-icons/Ionicons";
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -16,23 +16,23 @@ import Animated, {
   Extrapolate,
   withSpring,
   runOnJS,
-} from 'react-native-reanimated';
-import Ripple from 'react-native-material-ripple';
-const isAndroid = Platform.OS === 'android';
+} from "react-native-reanimated";
+import Ripple from "react-native-material-ripple";
+const isAndroid = Platform.OS === "android";
 
-const {width} = Dimensions.get('window');
+const { width } = Dimensions.get("window");
 
 const AddToCart = () => {
   const cartCounter = useSharedValue(0);
   const bounceCart = useSharedValue(0);
   const [cart, setCart] = useState(0);
 
-  let animRef = useRef({counter: 0, anims: []});
+  let animRef = useRef({ counter: 0, anims: [] });
 
   const cartCounterStyle = useAnimatedStyle(() => {
     return {
       // opacity: cartCounter.value,
-      transform: [{scale: cartCounter.value}],
+      transform: [{ scale: cartCounter.value }],
     };
   });
 
@@ -44,10 +44,10 @@ const AddToCart = () => {
       {
         extrapolateLeft: Extrapolate.CLAMP,
         extrapolateRight: Extrapolate.CLAMP,
-      },
+      }
     );
     return {
-      transform: [{translateX: withSpring(tranX)}],
+      transform: [{ translateX: withSpring(tranX) }],
     };
   });
 
@@ -62,12 +62,12 @@ const AddToCart = () => {
     // 'worklet';
     cartCounter.value = 0;
     counterRef.current += 1;
-    cartCounter.value = withSpring(1, {duration: 600}, done => {
+    cartCounter.value = withSpring(1, { duration: 600 }, (done) => {
       if (done) runOnJS(increment)();
     });
   };
 
-  const saveAnimFunc = func => {
+  const saveAnimFunc = (func) => {
     animRef?.current?.anims?.push(func);
   };
 
@@ -88,12 +88,13 @@ const AddToCart = () => {
           style={[
             style.col,
             {
-              alignItems: 'center',
-              width: '30%',
+              alignItems: "center",
+              width: "30%",
             },
-          ]}>
-          <Animated.View style={[{position: 'relative'}, cartStyle]}>
-            <Icon name="ios-cart-outline" color="black" size={30} />
+          ]}
+        >
+          <Animated.View style={[{ position: "relative" }, cartStyle]}>
+            <Icon name="cart-outline" color="black" size={30} />
             <Animated.View
               style={[
                 style.circle,
@@ -102,27 +103,32 @@ const AddToCart = () => {
                   top: -3,
                   right: -4,
                   zIndex: 2,
-                  alignItems: 'center',
-                  justifyContent: 'center',
+                  alignItems: "center",
+                  justifyContent: "center",
                 },
-              ]}>
-              <Text style={{color: 'white', fontWeight: 'bold', fontSize: 12}}>
+              ]}
+            >
+              <Text
+                style={{ color: "white", fontWeight: "bold", fontSize: 12 }}
+              >
                 {cart}
               </Text>
             </Animated.View>
           </Animated.View>
         </View>
-        <View style={{width: '50%'}}>
+        <View style={{ width: "50%" }}>
           <Ripple
             onPress={handleAddToCart}
-            style={[style.col, style.addToCartBtn]}>
+            style={[style.col, style.addToCartBtn]}
+          >
             <View>
               <Text
                 style={{
-                  color: 'white',
-                  textAlign: 'center',
-                  fontWeight: 'bold',
-                }}>
+                  color: "white",
+                  textAlign: "center",
+                  fontWeight: "bold",
+                }}
+              >
                 Add To Cart
               </Text>
 
@@ -194,7 +200,7 @@ const AddToCart = () => {
 
 export default AddToCart;
 
-export const AnimatedCircleMemo = ({onRotateEnd, index, onInit}) => {
+export const AnimatedCircleMemo = ({ onRotateEnd, index, onInit }) => {
   const rotate = useSharedValue(0);
   const initialTranslateX = width / 3.5;
   const translateX = useSharedValue(initialTranslateX);
@@ -206,10 +212,10 @@ export const AnimatedCircleMemo = ({onRotateEnd, index, onInit}) => {
     });
     return {
       transform: [
-        {translateY: transY},
-        {translateX: -1 * translateX.value},
-        {rotateZ: `-${rotate.value}deg`},
-        {translateX: translateX.value},
+        { translateY: transY },
+        { translateX: -1 * translateX.value },
+        { rotateZ: `-${rotate.value}deg` },
+        { translateX: translateX.value },
       ],
     };
   });
@@ -220,13 +226,13 @@ export const AnimatedCircleMemo = ({onRotateEnd, index, onInit}) => {
       {
         duration: 800,
       },
-      isFinished => {
+      (isFinished) => {
         // if (isFinished) {
         rotate.value = 0;
         runOnJS(onRotateEnd)();
         // onRotateEnd();
         // }
-      },
+      }
     );
   };
 
@@ -246,32 +252,32 @@ var AnimatedCircle = React.memo(AnimatedCircleMemo, MEMO);
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
   },
   row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: isAndroid ? 10 : '18%',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: isAndroid ? 10 : "18%",
     paddingHorizontal: 15,
-    alignItems: 'center',
+    alignItems: "center",
   },
   col: {
     paddingVertical: 5,
     marginHorizontal: 5,
   },
   addToCartBtn: {
-    backgroundColor: '#251B37',
+    backgroundColor: "#251B37",
     borderRadius: 10,
     paddingVertical: 10,
   },
   circle: {
     width: 20,
     height: 20,
-    backgroundColor: '#251B37',
+    backgroundColor: "#251B37",
     borderRadius: 50,
-    position: 'absolute',
-    right: '30%',
-    bottom: '25%',
+    position: "absolute",
+    right: "30%",
+    bottom: "25%",
     zIndex: -1,
   },
 });

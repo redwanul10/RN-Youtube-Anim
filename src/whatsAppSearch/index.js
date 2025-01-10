@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -7,19 +7,19 @@ import {
   TouchableOpacity,
   TextInput,
   Pressable,
-} from 'react-native';
-import Entypo from 'react-native-vector-icons/Entypo';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+} from "react-native";
+import Entypo from "@expo/vector-icons/Entypo";
+import AntDesign from "@expo/vector-icons/AntDesign";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 import Animated, {
   runOnJS,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
-} from 'react-native-reanimated';
+} from "react-native-reanimated";
 
-export default function WhatsappHeader({navigation}) {
+export default function WhatsappHeader({ navigation }) {
   const [toggleSearch, setToggleSearch] = useState(false);
   const [showSearchHeader, setShowSearchHeader] = useState(false);
 
@@ -28,13 +28,13 @@ export default function WhatsappHeader({navigation}) {
 
   const circleStyle = useAnimatedStyle(() => {
     return {
-      transform: [{scale: scale.value}],
+      transform: [{ scale: scale.value }],
       opacity: opacity.value,
     };
   });
 
   const open = () => {
-    scale.value = withTiming(50, {duration: 300}, () => {
+    scale.value = withTiming(50, { duration: 300 }, () => {
       runOnJS(setShowSearchHeader)(true);
     });
     opacity.value = 1;
@@ -42,7 +42,7 @@ export default function WhatsappHeader({navigation}) {
   };
 
   const close = () => {
-    scale.value = withTiming(1, {duration: 300}, () => {
+    scale.value = withTiming(1, { duration: 300 }, () => {
       opacity.value = 0;
     });
     setShowSearchHeader(false);
@@ -50,16 +50,17 @@ export default function WhatsappHeader({navigation}) {
   };
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{ flex: 1 }}>
       <View
         style={{
-          backgroundColor: toggleSearch ? 'white' : '#075E54',
+          backgroundColor: toggleSearch ? "white" : "#075E54",
           height: StatusBar.currentHeight || 30,
-        }}>
+        }}
+      >
         <StatusBar
           translucent
-          backgroundColor={toggleSearch ? 'white' : '#075E54'}
-          barStyle={toggleSearch ? 'dark-content' : 'light-content'}
+          backgroundColor={toggleSearch ? "white" : "#075E54"}
+          barStyle={toggleSearch ? "dark-content" : "light-content"}
         />
       </View>
       <View style={style.headerContainer}>
@@ -74,7 +75,7 @@ export default function WhatsappHeader({navigation}) {
                 name="arrow-back"
                 color="grey"
                 size={20}
-                style={{marginRight: 5}}
+                style={{ marginRight: 5 }}
               />
             </TouchableOpacity>
             <TextInput
@@ -94,7 +95,7 @@ export default function WhatsappHeader({navigation}) {
                   name="search1"
                   color="white"
                   size={20}
-                  style={{marginRight: 15}}
+                  style={{ marginRight: 15 }}
                 />
               </TouchableOpacity>
               <Entypo name="dots-three-vertical" color="white" size={20} />
@@ -107,7 +108,7 @@ export default function WhatsappHeader({navigation}) {
             name="camera"
             color="white"
             size={20}
-            style={{marginRight: 15}}
+            style={{ marginRight: 15 }}
           />
           <Text style={[style.headerText, style.tab]}>Chats</Text>
           <Text style={[style.headerText, style.tab]}>Status</Text>
@@ -116,7 +117,8 @@ export default function WhatsappHeader({navigation}) {
       </View>
       <Pressable
         onPress={() => navigation.goBack()}
-        style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+      >
         <Text>Go Back to Animation List</Text>
       </Pressable>
     </View>
@@ -125,51 +127,51 @@ export default function WhatsappHeader({navigation}) {
 
 const style = StyleSheet.create({
   row: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     paddingHorizontal: 20,
     paddingVertical: 10,
   },
   headerText: {
-    color: 'white',
-    fontWeight: 'bold',
+    color: "white",
+    fontWeight: "bold",
     fontSize: 20,
   },
   iconsContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   tab: {
     flex: 1,
-    textAlign: 'center',
-    textTransform: 'uppercase',
+    textAlign: "center",
+    textTransform: "uppercase",
     fontSize: 15,
-    color: 'rgba(255, 255, 255,0.6)',
+    color: "rgba(255, 255, 255,0.6)",
   },
   circle: {
     width: 15,
     height: 15,
-    backgroundColor: 'rgb(255, 255, 255)',
+    backgroundColor: "rgb(255, 255, 255)",
     borderRadius: 50,
-    position: 'absolute',
-    right: '15%',
-    top: '15%',
+    position: "absolute",
+    right: "15%",
+    top: "15%",
     // transform: [{scale: 50}],
     // zIndex: -1,
   },
   rowCenter: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   headerContainer: {
-    backgroundColor: '#075E54',
+    backgroundColor: "#075E54",
     paddingBottom: 5,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   searchContainer: {
-    backgroundColor: 'white',
-    shadowColor: '#000',
+    backgroundColor: "white",
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -184,6 +186,6 @@ const style = StyleSheet.create({
     height: 30,
     paddingTop: 0,
     paddingBottom: 0,
-    textAlignVertical: 'center',
+    textAlignVertical: "center",
   },
 });
