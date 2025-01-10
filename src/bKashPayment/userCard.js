@@ -1,9 +1,15 @@
-import {View, Text, StyleSheet} from 'react-native';
-import React from 'react';
+import { View, Text, StyleSheet } from "react-native";
+import React from "react";
 // import TextAvatar from './textAvatar';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from "@expo/vector-icons/FontAwesome";
 
-const UserCard = ({title, subTitle, description, avatarText, avatarColor}) => {
+const UserCard = ({
+  title,
+  subTitle,
+  description,
+  avatarText,
+  avatarColor,
+}) => {
   return (
     <View style={style.row}>
       {/* <TextAvatar
@@ -27,18 +33,18 @@ export default UserCard;
 
 const style = StyleSheet.create({
   row: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     paddingVertical: 10,
     paddingHorizontal: 10,
-    backgroundColor: 'white',
+    backgroundColor: "white",
   },
   mailText: {
     marginLeft: 15,
-    width: '80%',
+    width: "80%",
   },
   bold: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   title: {
     fontSize: 16,

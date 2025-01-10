@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useEffect} from 'react';
+import React, { useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -8,7 +8,7 @@ import {
   Image,
   TouchableOpacity,
   StatusBar,
-} from 'react-native';
+} from "react-native";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -17,16 +17,16 @@ import Animated, {
   interpolate,
   Extrapolate,
   withTiming,
-} from 'react-native-reanimated';
+} from "react-native-reanimated";
 import {
   PanGestureHandler,
   TouchableWithoutFeedback,
-} from 'react-native-gesture-handler';
-import Icon from 'react-native-vector-icons/AntDesign';
-import Icon2 from 'react-native-vector-icons/Entypo';
-import VideoCard from './videoCard';
+} from "react-native-gesture-handler";
+import Icon from "@expo/vector-icons/AntDesign";
+import Icon2 from "@expo/vector-icons/Entypo";
+import VideoCard from "./videoCard";
 
-const SIZES = Dimensions.get('window');
+const SIZES = Dimensions.get("window");
 
 // IMAGE SIZES
 const IMAGE_TOP_DISTANCE = 100;
@@ -36,20 +36,20 @@ const BIG_IMAGE_SIZE = SIZES.height / 3.2;
 // IMAGE WIDTH
 const IMAGE_WIDTH_COL = (SIZES.width * 33) / 100;
 
-const screenHeight = Dimensions.get('screen').height;
+const screenHeight = Dimensions.get("screen").height;
 let bottomTranslateY = (screenHeight * 95) / 100 - IMAGE_WIDTH_COL - 20;
 
-const YoutubePlayer = ({onClose, selectedVideo, bottomPosition}) => {
+const YoutubePlayer = ({ onClose, selectedVideo, bottomPosition }) => {
   const translateX = useSharedValue(0);
   const translateY = useSharedValue(300);
 
   useEffect(() => {
-    translateY.value = withTiming(0, {duration: 300});
+    translateY.value = withTiming(0, { duration: 300 });
   }, []);
 
   useEffect(() => {
     if (selectedVideo) {
-      translateY.value = withTiming(0, {duration: 300});
+      translateY.value = withTiming(0, { duration: 300 });
     }
   }, [selectedVideo]);
 
@@ -70,7 +70,7 @@ const YoutubePlayer = ({onClose, selectedVideo, bottomPosition}) => {
     },
     onEnd: (_, ctx) => {
       if (ctx.bottomSwipe && bottomTranslateY - 80 > translateY.value) {
-        translateY.value = withTiming(0, {duration: 300});
+        translateY.value = withTiming(0, { duration: 300 });
         return;
       }
 
@@ -81,13 +81,13 @@ const YoutubePlayer = ({onClose, selectedVideo, bottomPosition}) => {
         return;
       }
 
-      translateY.value = withTiming(0, {duration: 300});
+      translateY.value = withTiming(0, { duration: 300 });
     },
   });
 
   const translateStyle = useAnimatedStyle(() => {
     return {
-      transform: [{translateY: translateY.value}],
+      transform: [{ translateY: translateY.value }],
     };
   });
 
@@ -100,7 +100,7 @@ const YoutubePlayer = ({onClose, selectedVideo, bottomPosition}) => {
         {
           extrapolateRight: Extrapolate.CLAMP,
           extrapolateLeft: Extrapolate.CLAMP,
-        },
+        }
       ),
       height: interpolate(
         translateY.value,
@@ -109,7 +109,7 @@ const YoutubePlayer = ({onClose, selectedVideo, bottomPosition}) => {
         {
           extrapolateRight: Extrapolate.CLAMP,
           extrapolateLeft: Extrapolate.CLAMP,
-        },
+        }
       ),
       padding: interpolate(
         translateY.value,
@@ -118,7 +118,7 @@ const YoutubePlayer = ({onClose, selectedVideo, bottomPosition}) => {
         {
           extrapolateRight: Extrapolate.CLAMP,
           extrapolateLeft: Extrapolate.CLAMP,
-        },
+        }
       ),
     };
   });
@@ -132,14 +132,14 @@ const YoutubePlayer = ({onClose, selectedVideo, bottomPosition}) => {
         {
           extrapolateRight: Extrapolate.CLAMP,
           extrapolateLeft: Extrapolate.CLAMP,
-        },
+        }
       ),
     };
   });
 
   const expandPlayer = () => {
     if (translateY.value > 100) {
-      translateY.value = withTiming(0, {duration: 300});
+      translateY.value = withTiming(0, { duration: 300 });
     }
   };
 
@@ -151,14 +151,17 @@ const YoutubePlayer = ({onClose, selectedVideo, bottomPosition}) => {
           <Animated.View>
             <TouchableWithoutFeedback
               onPress={expandPlayer}
-              style={styles.playerContainer}>
+              style={styles.playerContainer}
+            >
               <Animated.View style={[imageStyle]}>
                 <Image
-                  style={[{width: '100%', height: '100%', resizeMode: 'cover'}]}
+                  style={[
+                    { width: "100%", height: "100%", resizeMode: "cover" },
+                  ]}
                   source={{
                     uri:
                       selectedVideo?.thumbnail ||
-                      'https://i.ytimg.com/vi/duJNVv9m2NY/maxresdefault.jpg',
+                      "https://i.ytimg.com/vi/duJNVv9m2NY/maxresdefault.jpg",
                   }}
                 />
               </Animated.View>
@@ -170,7 +173,8 @@ const YoutubePlayer = ({onClose, selectedVideo, bottomPosition}) => {
                   {
                     width: (SIZES.width * 43) / 100,
                   },
-                ]}>
+                ]}
+              >
                 {selectedVideo?.title}
               </Text>
             </TouchableWithoutFeedback>
@@ -178,13 +182,15 @@ const YoutubePlayer = ({onClose, selectedVideo, bottomPosition}) => {
         </PanGestureHandler>
 
         <View
-          style={[styles.iconsContainer, {width: (SIZES.width * 23) / 100}]}>
+          style={[styles.iconsContainer, { width: (SIZES.width * 23) / 100 }]}
+        >
           <Icon2 name="controller-play" size={30} color="black" />
           <TouchableOpacity
-            onPress={e => {
+            onPress={(e) => {
               e.stopPropagation();
               onClose();
-            }}>
+            }}
+          >
             <Icon name="close" size={30} color="black" />
           </TouchableOpacity>
         </View>
@@ -201,18 +207,20 @@ const YoutubePlayer = ({onClose, selectedVideo, bottomPosition}) => {
         </View>
 
         {/* Channel Info */}
-        <View style={[styles.rowCenter, {justifyContent: 'space-between'}]}>
+        <View style={[styles.rowCenter, { justifyContent: "space-between" }]}>
           <View style={styles.rowCenter}>
             <Image
               style={styles.channelLogo}
               source={{
                 uri:
                   selectedVideo?.channelLogo ||
-                  'https://yt3.ggpht.com/ytc/AKedOLR-TP_Uc-gh9UWENj1CsWNVyxDRwCikaVARVwhY=s48-c-k-c0x00ffffff-no-rj',
+                  "https://yt3.ggpht.com/ytc/AKedOLR-TP_Uc-gh9UWENj1CsWNVyxDRwCikaVARVwhY=s48-c-k-c0x00ffffff-no-rj",
               }}
             />
             <View>
-              <Text style={{fontWeight: 'bold', fontSize: 18, marginBottom: 5}}>
+              <Text
+                style={{ fontWeight: "bold", fontSize: 18, marginBottom: 5 }}
+              >
                 {selectedVideo?.channelName}
               </Text>
               <Text>41.7K subscribers</Text>
@@ -221,18 +229,18 @@ const YoutubePlayer = ({onClose, selectedVideo, bottomPosition}) => {
 
           <Text style={styles.subBtn}>Subscribe</Text>
         </View>
-        <Text style={{fontWeight: 'bold', marginTop: 20}}>Comments - 20</Text>
+        <Text style={{ fontWeight: "bold", marginTop: 20 }}>Comments - 20</Text>
         <Text style={styles.commentSection}>Add Comment...</Text>
 
         <VideoCard
           setSelectedVideo={() => {}}
           data={{
             channelLogo:
-              'https://yt3.ggpht.com/ytc/AL5GRJWhzi26YnOvIsPfOTBEQkx8VaNUuieO-4ypxg4I7A=s88-c-k-c0x00ffffff-no-rj',
+              "https://yt3.ggpht.com/ytc/AL5GRJWhzi26YnOvIsPfOTBEQkx8VaNUuieO-4ypxg4I7A=s88-c-k-c0x00ffffff-no-rj",
             thumbnail:
-              'https://i.ytimg.com/vi/cu5BZNymMzs/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLD9uEFytdrh6GT6-VYv5qYmJEoFKg',
-            title: 'Top 10 Places To Visit in 2023 (Year of Travel)',
-            channelTitle: 'Ryan Shirley   150k views  3 months ago',
+              "https://i.ytimg.com/vi/cu5BZNymMzs/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLD9uEFytdrh6GT6-VYv5qYmJEoFKg",
+            title: "Top 10 Places To Visit in 2023 (Year of Travel)",
+            channelTitle: "Ryan Shirley   150k views  3 months ago",
           }}
         />
       </Animated.View>
@@ -244,25 +252,25 @@ export default YoutubePlayer;
 
 const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     elevation: 10,
-    width: '100%',
+    width: "100%",
     height: SIZES.height,
-    position: 'absolute',
+    position: "absolute",
     zIndex: 9999,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   title: {
     fontSize: 20,
-    fontWeight: 'bold',
-    color: 'black',
+    fontWeight: "bold",
+    color: "black",
     marginTop: 10,
     lineHeight: 30,
   },
   sideTitle: {
     paddingLeft: 5,
     fontSize: 18,
-    color: 'black',
+    color: "black",
   },
   container: {
     paddingHorizontal: 10,
@@ -270,27 +278,27 @@ const styles = StyleSheet.create({
   },
   iconsContainer: {
     marginVertical: 20,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
+    flexDirection: "row",
+    justifyContent: "space-around",
   },
   rowCenter: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   subBtn: {
     fontSize: 16,
-    fontWeight: 'bold',
-    textTransform: 'uppercase',
-    color: 'red',
+    fontWeight: "bold",
+    textTransform: "uppercase",
+    color: "red",
     padding: 10,
   },
   playerContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   commentSection: {
-    backgroundColor: '#f2f2f2',
+    backgroundColor: "#f2f2f2",
     paddingVertical: 8,
     paddingLeft: 20,
     marginTop: 10,
@@ -300,6 +308,6 @@ const styles = StyleSheet.create({
     height: 50,
     marginRight: 10,
     borderRadius: 50,
-    resizeMode: 'contain',
+    resizeMode: "contain",
   },
 });

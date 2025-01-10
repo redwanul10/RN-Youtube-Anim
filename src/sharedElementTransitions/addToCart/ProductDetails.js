@@ -6,35 +6,35 @@ import {
   FlatList,
   Dimensions,
   Pressable,
-} from 'react-native';
-import React, {useRef} from 'react';
+} from "react-native";
+import React, { useRef } from "react";
 
-import {SafeAreaView} from 'react-native-safe-area-context';
-import Animated from 'react-native-reanimated';
-import {useRoute} from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/Entypo';
-import Cart, {HEIGHT, OPEN_HEIGHT} from './components/Cart';
-import {useCartStore} from './context/CartProvider';
+import { SafeAreaView } from "react-native-safe-area-context";
+import Animated from "react-native-reanimated";
+import { useRoute } from "@react-navigation/native";
+import Icon from "@expo/vector-icons/Entypo";
+import Cart, { HEIGHT, OPEN_HEIGHT } from "./components/Cart";
+import { useCartStore } from "./context/CartProvider";
 
-const IMAGE_HEIGHT = Dimensions.get('window').height * 0.4;
+const IMAGE_HEIGHT = Dimensions.get("window").height * 0.4;
 const foodInfo = [
-  {title: 'Energy', value: '210 cal', bgColor: '#fb6d37'},
-  {title: 'Proteins', value: '14.6 cal', bgColor: '#ffbe3d'},
-  {title: 'Fats', value: '14.6 cal', bgColor: '#7651dc'},
-  {title: 'Carbs', value: '14.6 cal', bgColor: '#84b468'},
+  { title: "Energy", value: "210 cal", bgColor: "#fb6d37" },
+  { title: "Proteins", value: "14.6 cal", bgColor: "#ffbe3d" },
+  { title: "Fats", value: "14.6 cal", bgColor: "#7651dc" },
+  { title: "Carbs", value: "14.6 cal", bgColor: "#84b468" },
 ];
 export default function ProductPage() {
-  const {cartList, addToCart} = useCartStore();
-  const {params} = useRoute();
+  const { cartList, addToCart } = useCartStore();
+  const { params } = useRoute();
   const cartRef = useRef();
   return (
     <>
       <View style={styles.container}>
-        <View style={{flex: 1}}>
+        <View style={{ flex: 1 }}>
           <View style={styles.center}>
             {/* Shared Element Image */}
             <Animated.Image
-              style={{width: '100%', height: IMAGE_HEIGHT}}
+              style={{ width: "100%", height: IMAGE_HEIGHT }}
               sharedTransitionTag={params.tagName}
               source={{
                 uri: params?.productInfo?.image,
@@ -48,7 +48,7 @@ export default function ProductPage() {
           {/* Title & description */}
           <Text style={styles.title}>Avocado Salad</Text>
           <Text style={styles.weight}>300 g</Text>
-          <Text style={[styles.weight, {marginVertical: 20}]}>
+          <Text style={[styles.weight, { marginVertical: 20 }]}>
             Homemade italian dressing, cherry tomatoes, green olives,Homemade
             italian
           </Text>
@@ -59,16 +59,17 @@ export default function ProductPage() {
               data={foodInfo}
               keyExtractor={(_, index) => index.toString()}
               horizontal={true}
-              ItemSeparatorComponent={<View style={{width: 10}} />}
+              ItemSeparatorComponent={<View style={{ width: 10 }} />}
               showsHorizontalScrollIndicator={false}
-              renderItem={({item}) => (
+              renderItem={({ item }) => (
                 <View
                   style={[
                     styles.foodInfo,
                     {
                       backgroundColor: item.bgColor,
                     },
-                  ]}>
+                  ]}
+                >
                   <Text
                     style={[
                       styles.whiteColor,
@@ -76,10 +77,11 @@ export default function ProductPage() {
                         fontSize: 12,
                         marginBottom: 5,
                       },
-                    ]}>
+                    ]}
+                  >
                     {item.title}
                   </Text>
-                  <Text style={[styles.whiteColor, {fontWeight: 'bold'}]}>
+                  <Text style={[styles.whiteColor, { fontWeight: "bold" }]}>
                     {item.value}
                   </Text>
                 </View>
@@ -88,53 +90,58 @@ export default function ProductPage() {
           </View>
         </View>
         {/* Add to Cart */}
-        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
           <View
             style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              width: '45%',
-              backgroundColor: '#f2f4f8',
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+              width: "45%",
+              backgroundColor: "#f2f4f8",
               padding: 15,
               borderRadius: 10,
-            }}>
+            }}
+          >
             <Icon name="plus" color="black" size={20} />
-            <Text style={{marginHorizontal: 10, fontWeight: 'bold'}}>1</Text>
+            <Text style={{ marginHorizontal: 10, fontWeight: "bold" }}>1</Text>
             <Icon name="minus" color="black" size={20} />
           </View>
 
           <Pressable
-            style={{width: '45%'}}
+            style={{ width: "45%" }}
             onPress={() => {
               addToCart(params?.productInfo);
               cartRef.current.open(OPEN_HEIGHT);
-            }}>
+            }}
+          >
             <View
               style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'center',
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
                 // width: '45%',
-                backgroundColor: '#1d212b',
+                backgroundColor: "#1d212b",
                 padding: 15,
                 borderRadius: 10,
-              }}>
+              }}
+            >
               <Text
                 style={{
                   marginHorizontal: 10,
-                  fontWeight: 'bold',
-                  color: 'white',
-                }}>
+                  fontWeight: "bold",
+                  color: "white",
+                }}
+              >
                 $300
               </Text>
 
               <Text
                 style={{
                   marginHorizontal: 10,
-                  fontWeight: 'bold',
-                  color: 'white',
-                }}>
+                  fontWeight: "bold",
+                  color: "white",
+                }}
+              >
                 Add
               </Text>
             </View>
@@ -151,21 +158,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 25,
-    backgroundColor: '#f9f9f9',
+    backgroundColor: "#f9f9f9",
     paddingTop: 50,
   },
   center: {
-    justifyContent: 'center',
-    display: 'flex',
-    alignItems: 'center',
+    justifyContent: "center",
+    display: "flex",
+    alignItems: "center",
   },
   title: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 5,
   },
   weight: {
-    color: 'grey',
+    color: "grey",
     fontSize: 17,
   },
   foodInfo: {
@@ -175,13 +182,13 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   whiteColor: {
-    color: 'white',
+    color: "white",
   },
   backBtnWrapper: {
-    position: 'absolute',
+    position: "absolute",
     left: 0,
     top: 20,
-    backgroundColor: '#e1e1e5',
+    backgroundColor: "#e1e1e5",
     padding: 10,
     borderRadius: 5,
   },
